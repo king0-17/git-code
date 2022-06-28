@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: laraapp
+    container_name: app
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www
+      - ./config/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile_Nginx
+    image: laranginx 
+    container_name: webserver 
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+      - ./config/nginx/conf.d/:/etc/nginx/conf.d
+    depends_on:
+      - app  
+
+  db:
+    image: mysql:8
+    container_name: db
+    environment:
+      MYSQL_DATABASE: db1
+      MYSQL_ROOT_PASSWORD: "123123123"
+    volumes:
+      - dbdata:/var/lib/mysql/
+
+volumes:
+  dbdata:   
+    driver: local
