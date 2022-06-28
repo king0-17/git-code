@@ -74,7 +74,7 @@ jobs:
         with:
           task-definition: task-definition.json
           container-name: app
-          image: 263269128568.dkr.ecr.ap-northeast-1.amazonaws.com/app:latest
+          image: 263269128568.dkr.ecr.ap-northeast-1.amazonaws.com/laraapp:latest
         env:
           AWS_DEFAULT_REGION: ap-northeast-1
           AWS_REGION: ap-northeast-1
