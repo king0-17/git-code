@@ -49,12 +49,12 @@ jobs:
         id: build-php-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: app
+          ECR_REPOSITORY: laraapp
           IMAGE_TAG: latest
         run: |
-          docker build -t app .
-          docker tag app:latest $ECR_REGISTRY/app:$IMAGE_TAG
-          docker push $ECR_REGISTRY/app:$IMAGE_TAG
+          docker build -t laraapp .
+          docker tag laraapp:latest $ECR_REGISTRY/laraapp:$IMAGE_TAG
+          docker push $ECR_REGISTRY/laraapp:$IMAGE_TAG
       - name: Build nginx
         id: build-nginx-image
         env:
